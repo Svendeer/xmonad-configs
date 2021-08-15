@@ -82,9 +82,10 @@ Config {
 
         -- time and date indicator 
         ,Run Date "\xf073 %a/%d/%b/%Y <fc=#CEDEF5,#4A014B> \xf017 %H:%M:%S </fc>" "date" 10
+        ,Run Com "sh" ["-c", "xdotool getwindowfocus getwindowname"] "windowName" 10
         ,Run UnsafeStdinReader
         ]
 
-        , template = "%UnsafeStdinReader%}{<fc=#CEDEF5,#811433> %default:Master% </fc><fc=#CEDEF5,#4A014B> %bright% </fc><fc=#FFFFFF,#811433> %memory% </fc><fc=#FFFFFF,#4A014B> %dynnetwork% </fc><fc=#FFFFFF,#811433> %date%</fc>"
+        , template = "%UnsafeStdinReader%<fc=#ffffff,#1E032C> %windowName% </fc>}{<fc=#CEDEF5,#811433> %default:Master% </fc><fc=#CEDEF5,#4A014B> %bright% </fc><fc=#FFFFFF,#811433> %memory% </fc><fc=#FFFFFF,#4A014B> %dynnetwork% </fc><fc=#FFFFFF,#811433> %date%</fc>"
 
    }

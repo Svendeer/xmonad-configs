@@ -52,9 +52,9 @@ Config {
                              , ("partly cloudy", "⛅")
                              , ("mostly cloudy", "🌧")
                              , ("considerable cloudiness", "⛈")]
-                             ["-t", "<fn=2><skyConditionS></fn> \xfa03 <tempC>° \xe373 <rh>% \xe317 <windKmh>"
-                             , "-L","10", "-H", "25", "--normal", "black"
-                             , "--high", "lightgoldenrod4", "--low", "darkseagreen4"]
+                             ["-t", "<fn=2><skyConditionS></fn> \xfa03 <tempC>° \xe373 <rh>% \xe317 <windKmh>Km/h"
+                             , "-L","10", "-H", "25", "--normal", "yellow"
+                             , "--high", "yellow", "--low", "yellow"]
                              18000
 
         -- network activity monitor (dynamic interface resolution)
@@ -104,6 +104,6 @@ Config {
         ,Run UnsafeStdinReader
         ]
 
-        , template = "%UnsafeStdinReader%<fc=#ffffff,#450445> Playing: %songPlaying% </fc>}%LEBL%{<fc=#CEDEF5,#811433> %default:Master% </fc><fc=#CEDEF5,#4A014B> %bright% </fc><fc=#FFFFFF,#811433> %memory% </fc><fc=#FFFFFF,#4A014B> %dynnetwork% </fc><fc=#FFFFFF,#811433> %date%</fc>"
+        , template = "%UnsafeStdinReader%<fc=#ffffff,#1E032C> Playing: %songPlaying% </fc>}%LEBL%{<fc=#CEDEF5,#811433> %default:Master% </fc><fc=#CEDEF5,#4A014B> %bright% </fc><fc=#FFFFFF,#811433> %memory% </fc><fc=#FFFFFF,#4A014B> %dynnetwork% </fc><fc=#FFFFFF,#811433> %date%</fc>"
 
    }
