@@ -1,0 +1,1 @@
+scrot -s -e 'mv $f /home/svendeer/Pictures/Screenshots/'
