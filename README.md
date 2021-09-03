@@ -1,5 +1,5 @@
 # xmonad-configs
-##My personal xmonad config files.
+## My personal xmonad config files.
 **Pink-forest:**
 ![Pink-forest.](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/pink-forest/Screenshot_20210814_174232.png)
 **Onedark:**
