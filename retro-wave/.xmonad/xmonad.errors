@@ -1,0 +1,15 @@
+
+xmonad.hs:320:35: warning: [-Wdeprecations]
+    In the use of ‘defaultGSConfig’
+    (imported from XMonad.Actions.GridSelect):
+    Deprecated: "Use def (from Data.Default, and re-exported from XMonad.Actions.GridSelect) instead."
+    |
+320 |     , ((modm, xK_g), goToSelected defaultGSConfig)
+    |                                   ^^^^^^^^^^^^^^^
+
+xmonad.hs:389:14: warning: [-Wdeprecations]
+    In the use of ‘spacing’ (imported from XMonad.Layout.Spacing):
+    Deprecated: "Use spacingRaw instead."
+    |
+389 |     tiled  = spacing 5 $ ResizableTall nmaster delta ratio []
+    |              ^^^^^^^
