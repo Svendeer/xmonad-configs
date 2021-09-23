@@ -8,3 +8,5 @@
 ![Retro-wave](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/retro-wave/screenshot.png)
 **Solarized:**
 ![Solarized](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/solarized/Screenshot_20210918_174053.png)
+**Dracula:**
+![Dracula theme](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/dracula/image_2021-09-23_12-53-44.png)
