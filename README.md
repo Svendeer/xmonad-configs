@@ -9,4 +9,4 @@
 **Solarized:**
 ![Solarized](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/solarized/Screenshot_20210918_174053.png)
 **Dracula:**
-![Dracula theme](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/dracula/image_2021-09-23_12-53-44.png)
+![Dracula theme](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/dracula/Screenshot_20210923_133107.png)
