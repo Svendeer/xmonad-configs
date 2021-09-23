@@ -6,3 +6,5 @@
 ![Onedark](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/onedark/xmonad-onedark.png)
 **Retro-wave:**
 ![Retro-wave](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/retro-wave/screenshot.png)
+**Solarized:**
+![Solarized](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/solarized/Screenshot_20210918_174053.png)
