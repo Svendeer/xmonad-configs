@@ -1,0 +1,98 @@
+Config { 
+
+   -- appearance
+     font =         "xft:Iosevka:size=12:bold:antialias=true"
+   , bgColor =      "#002831"
+   , fgColor =      "#fffefe"
+   , position =     Top
+   --border =       BottomB
+   --borderColor =  "#ffffff"
+
+   -- layout
+   , sepChar =  "%"   -- delineator between plugin names and straight text
+   , alignSep = "}{"  -- separator between left-right alignment
+
+   -- general behavior
+   , lowerOnStart =     True    -- send to bottom of window stack on start
+   , hideOnStart =      False   -- start with window unmapped (hidden)
+   , allDesktops =      False    -- show on all desktops
+   , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+   , pickBroadest =     False   -- choose widest display (multi-monitor)
+   , persistent =       True    -- enable/disable hiding (True = disabled)
+
+   -- plugins
+   --   Numbers can be automatically colored according to their value. xmobar
+   --   decides color based on a three-tier/two-cutoff system, controlled by
+   --   command options:
+   --     --Low sets the low cutoff
+   --     --High sets the high cutoff
+   --
+   --     --low sets the color below --Low cutoff
+   --     --normal sets the color between --Low and --High cutoffs
+   --     --High sets the color above --High cutoff
+   --
+   --   The --template option controls how the plugin is displayed. Text
+   --   color can be set by enclosing in <fc></fc> tags. For more details
+   --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
+   , commands = 
+
+       
+        -- weather monitor
+        [ Run Weather "RJTT" [ "--template", "[<icon=/home/svendeer/.config/xmobar/icons/temp.xbm/>: <fc=#81A1C1><tempC></fc>°]"
+                             ] 36000
+
+        -- network activity monitor (dynamic interface resolution)
+        , Run DynNetwork     [ "--template" , "\xf1eb <rx>kB/s" --Solo el de bajada.
+                             , "--Low"      , "1000"       -- units: B/s
+                             , "--High"     , "5000"       -- units: B/s
+                             , "--low"      , "#fcf4dc,#e24d8e"
+                             , "--normal"   , "#fcf4dc,#e24d8e"
+                             , "--high"     , "#fcf4dc,#e24d8e"
+                             ] 10
+
+        -- cpu activity monitor
+--        --, Run MultiCpu       [ "--template" , "[\xf2db <total0>%|<total1>%]"
+--        --                     , "--Low"      , "50"         -- units: %
+--        --                     , "--High"     , "85"         -- units: %
+--        --                     , "--low"      , "#FFFFFF"
+--        --                     , "--normal"   , "#FFFFFF"
+--        --                     , "--high"     , "#FFFFFF"
+--        --                     ] 10
+                          
+        -- memory usage monitor
+        , Run Memory         [ "--template" ,"\xf538 <usedratio>%"
+                             , "--Low"      , "20"        -- units: %
+                             , "--High"     , "90"        -- units: %
+                             , "--low"      , "#fcf4dc,#c61c6f"
+                             , "--normal"   , "#fcf4dc,#c61c6f"
+                             , "--high"     , "#fcf4dc,#c61c6f"
+                             ] 10
+
+        , Run Brightness    [
+                            "--template", "\xf185 <percent>%", "--", 
+                            "--device", "intel_backlight"] 1
+
+        , Run Volume "default" "Master"
+                        [ "-t", "<status>", "--"
+                        , "--on", "<fc=#FFFFFF,#191826><fn=1>\xf028</fn> <volume>%</fc>"
+                        , "--onc", "#A3BE8C"
+                        , "--off", "<fc=#FFFFFF,#191826><fn=1>\xf026</fn> MUTE</fc>"
+                        , "--offc", "#FFFFFF"
+                        ] 1
+
+        -- time and date indicator 
+        ,Run Date "<fc=#fcf4dc,#00b39e> \xf017 %H:%M:%S </fc>" "date" 10
+        ,Run Com "sh" ["-c", "xdotool getwindowfocus getwindowname"] "windowName" 10
+        ,Run Com "sh" ["-c", "echo -ne \xf028 $(pamixer --get-volume &)%"] "pamixerVolume" 10
+        ,Run UnsafeStdinReader
+        ]
+
+        , template = "%UnsafeStdinReader% \
+        \ <fc=#FFFFFF,#002831> %windowName% </fc>}{\
+        \ <fc=#fcf4dc,#2176c7> %pamixerVolume% </fc>\
+        \ <fc=#fcf4dc,#178ec8> %bright% </fc>\
+        \ <fc=#fcf4dc,#c61c6f> %memory% </fc>\
+        \ <fc=#fcf4dc,#e24d8e> %dynnetwork% </fc>\
+        \ <fc=#fcf4dc,#00b39e> %date% </fc>"
+
+   }
