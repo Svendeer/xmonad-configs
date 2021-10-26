@@ -10,3 +10,5 @@
 ![Solarized](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/solarized/Screenshot_20210918_174053.png)
 **Dracula:**
 ![Dracula theme](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/dracula/Screenshot_20210923_133107.png)
+**Nord:**
+![Nord theme](https://raw.githubusercontent.com/Svendeer/xmonad-configs/main/nord/2021-10-26_17-12.png)
