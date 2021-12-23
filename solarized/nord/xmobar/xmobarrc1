@@ -1,0 +1,136 @@
+Config { 
+
+   -- appearance
+     font =         "xft:Iosevka:size=15:bold:antialias=true"
+   , bgColor =      "#2E3440"
+   , fgColor =      "#fffefe"
+   , position =     Static { xpos = 1366 , ypos = 0, width = 1920, height = 25 }
+   --border =       BottomB
+   --borderColor =  "#e5e9f0"
+
+   -- layout
+   , sepChar =  "%"   -- delineator between plugin names and straight text
+   , alignSep = "}{"  -- separator between left-right alignment
+
+   -- general behavior
+   , lowerOnStart =     True    -- send to bottom of window stack on start
+   , hideOnStart =      False   -- start with window unmapped (hidden)
+   , allDesktops =      False    -- show on all desktops
+   , overrideRedirect = True    -- set the Override Redirect flag (Xlib)
+   , pickBroadest =     False   -- choose widest display (multi-monitor)
+   , persistent =       True    -- enable/disable hiding (True = disabled)
+
+   -- plugins
+   --   Numbers can be automatically colored according to their value. xmobar
+   --   decides color based on a three-tier/two-cutoff system, controlled by
+   --   command options:
+   --     --Low sets the low cutoff
+   --     --High sets the high cutoff
+   --
+   --     --low sets the color below --Low cutoff
+   --     --normal sets the color between --Low and --High cutoffs
+   --     --High sets the color above --High cutoff
+   --
+   --   The --template option controls how the plugin is displayed. Text
+   --   color can be set by enclosing in <fc></fc> tags. For more details
+   --   see http://projects.haskell.org/xmobar/#system-monitor-plugins.
+   , commands = 
+       
+        -- weather monitor
+        [ Run Weather "RJTT" [ "--template", "[<icon=/home/svendeer/.config/xmobar/icons/temp.xbm/>: <fc=#81A1C1><tempC></fc>°]"
+                             ] 36000
+
+        , Run WeatherX "LEBL"
+                             [ ("clear", "\xe34d")
+                             , ("sunny", "\xe34d")
+                             , ("mostly clear", "\Xe30c")
+                             , ("mostly sunny", "\Xe30c")
+                             , ("partly sunny", "\Xe302")
+                             , ("fair", "\Xe3e3")
+                             , ("cloudy","\xe32e")
+                             , ("overcast","\xe32e")
+                             , ("partly cloudy", "\xe376")
+                             , ("mostly cloudy", "\xe316")
+                             , ("considerable cloudiness", "\xe31b")]
+                             ["-t", "<tempC>°C <windKmh>Km/h \xe317"
+                             , "-L","10", "-H", "25"
+                             , "--normal"   , "#d3d4d7,#101215"
+                             , "--high"     , "#d3d4d7,#101215"
+                             , "--low"      , "#d3d4d7,#101215"]
+                             10
+
+        -- network activity monitor (dynamic interface resolution)
+        , Run DynNetwork [ "--template" , "\xf1eb <tx>kB/s \xfc35 <rx>kB/s \xfc2c" --Up/Down
+                             , "--Low"      , "1000"       -- units: B/s
+                             , "--High"     , "5000"       -- units: B/s
+                             , "--low"      , "#2E3440,#A3BE8C"
+                             , "--normal"   , "#2E3440,#A3BE8C"
+                             , "--high"     , "#2E3440,#A3BE8C"
+                            -- , "--devices", "wlp2s0,enp3s0"
+                             ] 10
+
+        -- cpu activity monitor
+--        --, Run MultiCpu       [ "--template" , "[\xf2db <total0>%|<total1>%]"
+--        --                     , "--Low"      , "50"         -- units: %
+--        --                     , "--High"     , "85"         -- units: %
+--        --                     , "--low"      "#d3d4d7,#101215"
+--        --                     , "--normal    "#d3d4d7,#101215"
+--        --                     , "--high"     "#d3d4d7,#101215"
+--        --                     ] 10
+                          
+        -- memory usage monitor
+        , Run Memory         [ "--template" ,"\xf538 <usedratio>%"
+                             , "--Low"      , "20"        -- units: %
+                             , "--High"     , "90"        -- units: %
+                             , "--low"      , "#2E3440,#EBCB8B"
+                             , "--normal"   , "#2E3440,#EBCB8B"
+                             , "--high"     , "#2E3440,#EBCB8B"
+                             ] 10
+
+        , Run Brightness    [
+                            "--template", "\xf185 <percent>%", "--", 
+                            "--device", "intel_backlight"] 1
+
+        , Run Volume "default" "Master"
+                        [ "-t", "<status>", "--"
+                        , "--on", "<fc=#d3d4d7,#1B2026><fn=1>\xf028</fn> <volume>%</fc>"
+                        , "--onc", "#A3BE8C"
+                        , "--off", "<fc=#d3d4d7,#1B2026><fn=1>\xf026</fn> MUTE</fc>"
+                        , "--offc", "#BF616A"
+                        ] 1
+
+        -- time and date indicator 
+        ,Run Date "\xf073 %a %d %b" "date" 10
+        ,Run Date "\xf017 %H:%M:%S" "time" 10
+        ,Run Com "sh" ["-c", "/home/svendeer/.xmonad/cmus-song.sh &"] "songPlaying" 10
+        ,Run Com "sh" ["-c", "echo -ne \xf028 $(pamixer --get-volume &)%"] "pamixerVolume" 10
+        ,Run UnsafeStdinReader
+        ]
+
+        , template 
+        = "%UnsafeStdinReader% <fc=#2E3440,#5E81AC><fc=#2E3440,#5E81AC></fc><action=`cmus-remote --prev`> ﭢ </action><fc=#434C5E,#5E81AC></fc></fc><fc=#ECEFF4,#434C5E><action=`cmus-remote --pause`> %songPlaying% </action></fc><fc=#434C5E,#5E81AC></fc><fc=#2E3440,#5E81AC><action=`cmus-remote --next`> ﭠ <fc=#2E3440,#5E81AC></fc><fc=#2E3440,#2E3440> </fc></action></fc>\
+            \}{ \
+            -------------------------------------------------
+            \<fc=#2E3440,#BF616A></fc>\
+            \<fc=#2E3440,#BF616A> %pamixerVolume%</fc>\
+            \<fc=#BF616A,#BF616A></fc>\
+            -------------------------------------------------
+            \<fc=#BF616A,#D08770></fc>\
+            \<fc=#2E3440,#D08770> %bright%</fc>\
+            \<fc=#D08770,#D08770></fc>\
+            -------------------------------------------------
+            \<fc=#D08770,#EBCB8B></fc>\
+            \<fc=#2E3440,#EBCB8B> %memory%</fc>\
+            \<fc=#EBCB8B,#EBCB8B></fc>\
+            -------------------------------------------------
+            \<fc=#EBCB8B,#A3BE8C></fc>\
+            \<fc=#2E3440,#A3BE8C> %dynnetwork%</fc>\
+            \<fc=#A3BE8C,#A3BE8C></fc>\
+            -------------------------------------------------
+            \<fc=#A3BE8C,#B48EAD></fc>\
+            \<fc=#2E3440,#B48EAD> %date%</fc>\
+            \<fc=#B48EAD,#B48EAD></fc>\
+            ------------------------------------------------
+            \<fc=#B48EAD,#5E81AC></fc>\
+            \<fc=#2E3440,#5E81AC> %time% </fc>"
+   }
