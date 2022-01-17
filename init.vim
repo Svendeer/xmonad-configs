@@ -1,13 +1,3 @@
-
-"  (                                                                                                                     
-"  )\ )                    (                  (                                                         (                
-" (()/(  )      (          )\ )   (    (   (  )\               (        )   (      )                    )\ )  (   (  (   
-"  /(_))/((    ))\  (     (()/(  ))\  ))\  )(((_)(     (      ))\  (   /((  )\    (       (   (    (   (()/(  )\  )\))(  
-" (_)) (_))\  /((_) )\ )   ((_))/((_)/((_)(()\   )\    )\ )  /((_) )\ (_))\((_)   )\  '   )\  )\   )\ ) /(_))((_)((_))\  
-" / __|_)((_)(_))  _(_/(   _| |(_)) (_))   ((_) ((_)  _(_/( (_))  ((_)_)((_)(_) _((_))   ((_)((_) _(_/((_) _| (_) (()(_) 
-" \__ \\ V / / -_)| ' \))/ _` |/ -_)/ -_) | '_| (_-< | ' \))/ -_)/ _ \\ V / | || '  \() / _|/ _ \| ' \))|  _| | |/ _` |  
-" |___/ \_/  \___||_||_| \__,_|\___|\___| |_|   /__/ |_||_| \___|\___/ \_/  |_||_|_|_|  \__|\___/|_||_| |_|   |_|\__, |  
-
 " Run nerdtree on autostart
 set guifont=Iosevka 
 set tabstop=4
@@ -77,6 +67,7 @@ call plug#begin('~/.config/nvim/vim-plug/plugged')
     Plug 'joshdick/onedark.vim' " One dark theme
     Plug 'ayu-theme/ayu-vim' " Ayu theme
     Plug 'dracula/vim', {'as': 'dracula'} " Dracula theme.
+    Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 call plug#end()
 
@@ -154,7 +145,7 @@ let g:colorizer_auto_color = 1
 let g:airline_theme='edge'
 
 function! Autostart()
-    autocmd VimEnter * colorscheme dracula
+    autocmd VimEnter * colorscheme tokyonight
     autocmd VimEnter * NERDTree
     " autocmd VimEnter * Startify
     autocmd VimEnter * ColorHighlight
